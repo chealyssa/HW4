@@ -1,5 +1,5 @@
 /*
- * *** YOUR NAME GOES HERE / YOUR SECTION NUMBER ***
+ * *** Che Alyssa Zulaik - COMP272-002 ***
  *
  * This HashingProblems object contains three methods / problems that you must
  * complete utilize the HashMap object within the Java's Collection Framework Library.
@@ -33,15 +33,22 @@ class HashingProblems {
 
     public double getAverage(HashMap<Integer, Integer> map, int[] array) {
 
-        /*
-         * ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOU NAME AT TOP OF FILE
-         *
-         * Note: if NO values found in common between the HashMap and supplied array,
-         * returning 0.0 is NOT correct, as that is not the average value. Whereas
-         * returning 0.0/0.0 IS correct (which would return a non-number).
-         */
+        double sum = 0.0;
+        int counter = 0;
 
-         return 0.0 / 0.0;
+        for(int key : array) // for each key in the array
+        {
+            if(map.containsKey(key)) // checks if map has the key
+            {
+                sum += map.get(key); // find the sum
+                counter++;
+            }
+        }
+        if(counter == 0)
+        {
+            return 0.0 / 0.0;
+        }
+         return sum/counter;
   }
 
 
@@ -56,13 +63,13 @@ class HashingProblems {
     
       ArrayList<String> result = new ArrayList<>();
 
-      /*
-       * ADD YOUR CODE HERE
-       *
-       * Hint: Consider iterating over the HashMap using the keySet method.
-       */
-
-
+      for(Integer key : map.keySet())
+      {
+          if(key % 2 != 0) //check if odd
+          {
+              result.add(map.get(key));
+          }
+      }
       return result;
   }
 
@@ -105,12 +112,31 @@ class HashingProblems {
    */
 
   public int twoSums(int[] numbers, int k) {
+      HashSet<Integer> set = new HashSet<>();
+      int counter = 0;
 
-      /*
-       * ADD YOUR CODE HERE
+      /* First for loop
+       * populate the HashSet
        */
+      for(int n : numbers)
+      {
+          set.add(n);
+      }
 
-      return -1;
+      /* Second for loop
+       * lookup probing the HashMap per loop iteration
+       * 1 + 4 = 5(if exists, counts) same as 5 - 1 = 4
+       * 4 + 4 = 8(if exists, counts) same as 8 - 4 = 4
+       * 5 + 4 = 9(if exists, counts) same as 9 - 5 = 4
+       */
+      for(int n : numbers)
+      {
+          if(set.contains(n + k))
+          {
+              counter++;
+          }
+      }
+      return counter;
   }
 
 } /* end class HashingProblems */
